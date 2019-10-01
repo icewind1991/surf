@@ -94,7 +94,7 @@ impl Body {
     /// Create a new empty body.
     pub fn empty() -> Self {
         Self {
-            reader: Box::new(std::io::empty()),
+            reader: Box::new(futures::io::empty()),
         }
     }
 
