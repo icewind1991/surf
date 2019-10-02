@@ -1,6 +1,7 @@
 use futures::future::BoxFuture;
 use futures::io::AsyncReadExt;
 use surf::middleware::{Body, HttpClient, Middleware, Next, Request, Response};
+use std::sync::Arc;
 
 struct Doubler;
 
@@ -8,7 +9,7 @@ impl Middleware for Doubler {
     fn handle<'a>(
         &'a self,
         req: Request,
-        client: Box<dyn HttpClient>,
+        client: Arc<dyn HttpClient>,
         next: Next<'a>,
     ) -> BoxFuture<'a, Result<Response, surf::Exception>> {
         if req.method().is_safe() {
